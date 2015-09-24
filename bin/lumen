@@ -30,4 +30,8 @@ case $host in
         export LUA_PATH="$LUA_PATH;${home}/?.lua;${dir}/lib/?.lua;;";;
 esac
 
-exec ${host} "${home}/${code}" "$@"
+if [ ! -z "`which rlwrap`" ]; then
+  wrap=rlwrap
+fi
+
+exec ${wrap} ${host} "${home}/${code}" "$@"
